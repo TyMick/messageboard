@@ -25,16 +25,23 @@ $(function() {
   $("#addNewThread").submit(function() {
     event.preventDefault();
     if ($("#threadBoard").val()) {
+      $("button").attr("disabled", true);
+      $("button", this).html(
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Uploading...</span>'
+      );
       $.ajax({
         url: "/api/threads/" + $("#threadBoard").val(),
         type: "post",
         dataType: "json",
         data: getFormDataObject("addNewThread"),
-        success: displayResult,
+        success: function(result) {
+          displayResult(result);
+          $("#addNewThread button").html("POST");
+          $("button").removeAttr("disabled");
+        },
         error: function() {
           window.location.href =
-            "https://ty-messageboard.glitch.me/b/" +
-            $("#threadBoard").val();
+            "https://ty-messageboard.glitch.me/b/" + $("#threadBoard").val();
         }
       });
     } else {
@@ -45,10 +52,18 @@ $(function() {
   $("#getRecentThreads").submit(function() {
     event.preventDefault();
     if ($("#threadBoard").val()) {
+      $("button").attr("disabled", true);
+      $("button", this).html(
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Uploading...</span>'
+      );
       $.ajax({
         url: "/api/threads/" + $("#threadBoard").val(),
         type: "get",
-        success: displayResult
+        success: function(result) {
+          displayResult(result);
+          $("#getRecentThreads button").html("GET");
+          $("button").removeAttr("disabled");
+        }
       });
     } else {
       $("#threadBoard").focus();
@@ -58,11 +73,19 @@ $(function() {
   $("#reportThread").submit(function() {
     event.preventDefault();
     if ($("#threadBoard").val()) {
+      $("button").attr("disabled", true);
+      $("button", this).html(
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Uploading...</span>'
+      );
       $.ajax({
         url: "/api/threads/" + $("#threadBoard").val(),
         type: "put",
         data: getFormDataObject("reportThread"),
-        success: displayResult
+        success: function(result) {
+          displayResult(result);
+          $("#reportThread button").html("PUT");
+          $("button").removeAttr("disabled");
+        }
       });
     } else {
       $("#threadBoard").focus();
@@ -72,11 +95,19 @@ $(function() {
   $("#deleteThread").submit(function() {
     event.preventDefault();
     if ($("#threadBoard").val()) {
+      $("button").attr("disabled", true);
+      $("button", this).html(
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Uploading...</span>'
+      );
       $.ajax({
         url: "/api/threads/" + $("#threadBoard").val(),
         type: "delete",
         data: getFormDataObject("deleteThread"),
-        success: displayResult
+        success: function(result) {
+          displayResult(result);
+          $("#deleteThread button").html("DELETE");
+          $("button").removeAttr("disabled");
+        }
       });
     } else {
       $("#threadBoard").focus();
@@ -86,12 +117,20 @@ $(function() {
   $("#addNewReply").submit(function() {
     event.preventDefault();
     if ($("#replyBoard").val()) {
+      $("button").attr("disabled", true);
+      $("button", this).html(
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Uploading...</span>'
+      );
       $.ajax({
         url: "/api/replies/" + $("#replyBoard").val(),
         type: "post",
         data: getFormDataObject("addNewReply"),
         dataType: "json",
-        success: displayResult,
+        success: function(result) {
+          displayResult(result);
+          $("#addNewReply button").html("POST");
+          $("button").removeAttr("disabled");
+        },
         error: function() {
           window.location.href =
             "https://ty-messageboard.glitch.me/b/" +
@@ -108,11 +147,19 @@ $(function() {
   $("#getThreadAndReplies").submit(function() {
     event.preventDefault();
     if ($("#replyBoard").val()) {
+      $("button").attr("disabled", true);
+      $("button", this).html(
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Uploading...</span>'
+      );
       $.ajax({
         url: "/api/replies/" + $("#replyBoard").val(),
         type: "get",
         data: $("#getThreadAndReplies").serialize(),
-        success: displayResult
+        success: function(result) {
+          displayResult(result);
+          $("#getThreadAndReplies button").html("GET");
+          $("button").removeAttr("disabled");
+        }
       });
     } else {
       $("#replyBoard").focus();
@@ -122,11 +169,19 @@ $(function() {
   $("#reportReply").submit(function() {
     event.preventDefault();
     if ($("#replyBoard").val()) {
+      $("button").attr("disabled", true);
+      $("button", this).html(
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Uploading...</span>'
+      );
       $.ajax({
         url: "/api/replies/" + $("#replyBoard").val(),
         type: "put",
         data: getFormDataObject("reportReply"),
-        success: displayResult
+        success: function(result) {
+          displayResult(result);
+          $("#reportReply button").html("PUT");
+          $("button").removeAttr("disabled");
+        }
       });
     } else {
       $("#replyBoard").focus();
@@ -136,11 +191,19 @@ $(function() {
   $("#deleteReply").submit(function() {
     event.preventDefault();
     if ($("#replyBoard").val()) {
+      $("button").attr("disabled", true);
+      $("button", this).html(
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Uploading...</span>'
+      );
       $.ajax({
         url: "/api/replies/" + $("#replyBoard").val(),
         type: "delete",
         data: getFormDataObject("deleteReply"),
-        success: displayResult
+        success: function(result) {
+          displayResult(result);
+          $("#deleteReply button").html("DELETE");
+          $("button").removeAttr("disabled");
+        }
       });
     } else {
       $("#replyBoard").focus();
